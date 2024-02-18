@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -13,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BoardController {
     private final BoardService boardService;
 
-
-
     @GetMapping("/hello")
     public String Hello(Model model){
-        model.addAttribute("cnt",boardService.boardCount());return "/boards/first";
+        model.addAttribute("cnt",boardService.boardCount());
+        return "/boards/first";
     }
 
     @GetMapping("/test")
@@ -31,5 +32,11 @@ public class BoardController {
     public String getAllList(Model model){
         model.addAttribute("list",boardService.boardList());
         return "/boards/main";
+    }
+
+    @GetMapping("/view")
+    public String viewBoard(Model model,@RequestParam Long boardId){
+        model.addAttribute("view",boardService.getBoard(boardId));
+        return "/boards/view";
     }
 }

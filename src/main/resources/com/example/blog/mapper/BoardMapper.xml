@@ -9,4 +9,8 @@
     <select id="getList" resultType="com.example.blog.domain.Board">
         SELECT * from tbl_board;
     </select>
+
+    <select id="getBoard" parameterType="Long" resultType="com.example.blog.domain.Board">
+        SELECT * from tbl_board where boardId=#{boardId};
+    </select>
 </mapper>
