@@ -1,13 +1,11 @@
 package com.example.blog.controller;
 
+import com.example.blog.domain.Board;
 import com.example.blog.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,5 +36,16 @@ public class BoardController {
     public String viewBoard(Model model,@RequestParam Long boardId){
         model.addAttribute("view",boardService.getBoard(boardId));
         return "/boards/view";
+    }
+
+    @GetMapping("/upload")
+    public String uploadBoardForm(){
+        return "/boards/upload";
+    }
+
+    @PostMapping("/upload")
+    public String uploadBoard(Board board){
+        boardService.uploadBoard(board);
+        return "redirect:/board/main";
     }
 }
