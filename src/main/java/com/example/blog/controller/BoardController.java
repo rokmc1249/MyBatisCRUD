@@ -48,4 +48,16 @@ public class BoardController {
         boardService.uploadBoard(board);
         return "redirect:/board/main";
     }
+
+    @PutMapping("/update")
+    public String updateBoard(Board board){
+        boardService.updateBoard(board);
+        return "redirect:/board/main";
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteBoard(@RequestParam Long boardId){
+        boardService.deleteBoard(boardId);
+        return "redirect:/board/main";
+    }
 }

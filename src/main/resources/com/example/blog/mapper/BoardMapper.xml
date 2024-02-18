@@ -17,4 +17,12 @@
     <insert id="uploadBoard" parameterType="com.example.blog.domain.Board">
         INSERT INTO tbl_board(title,content,name) VALUES (#{title},#{content},#{name});
     </insert>
+
+    <update id="updateBoard" parameterType="com.example.blog.domain.Board">
+        UPDATE tbl_board SET title=#{title} , content=#{content} WHERE boardId=#{boardId};
+    </update>
+
+    <delete id="deleteBoard" parameterType="Long">
+        DELETE FROM tbl_board where boardId=#{boardId};
+    </delete>
 </mapper>
